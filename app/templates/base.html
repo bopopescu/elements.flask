@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <!-- МЕТА -->
+    <title>
+    {% block title %} 
+
+    {% endblock %} | Flask</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename = 'css/style.css') }}" rel="stylesheet">
+  </head>
+  <body>
+
+  <nav>
+
+    <div class="nav-field">
+      <div class="nav-field-box">
+        <input id="navbutton" type="checkbox">
+        <label for="navbutton" class="menu_btn"> 
+          <span></span>
+        </label>
+        <div class="nav-field-box-logo"><a href="{{ url_for('index') }}">FLASK</a></div>
+        <div id="menu" class="nav_menu">
+          <ul>
+            <li class="box-item"><a href="{{ url_for('index') }}">Hello</a></li>
+            <li class="box-item"><a href="{{ url_for('comments.vcomments') }}">Comments</a></li>
+            <li class="box-item"><a href="{{ url_for('feedback.vfeedback') }}">Feedback</a></li>
+            <li class="line"></li>
+            <li class="box-item login">
+              {% if current_user.has_role('user') %}
+                <a href="{{ url_for('logout') }}">Log out</a>
+              {% else %}
+              <a href="{{ url_for('security.login') }}"><i class="fa fa-user fa-lg" aria-hidden="true"></i></a>
+              {% endif %}
+            </li> 
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </nav>
+
+  <content>
+    <div class="content-box">
+      <h1>{% block content_title %} 
+
+          {% endblock %}</h1>
+      
+      <div class="elements">
+        {% block content %} 
+
+        {% endblock %}
+      </div>
+
+    </div>
+  </content>
+
+  </body>
+</html>

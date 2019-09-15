@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Comments
+{% endblock %}
+
+{% block content_title %}
+	Comments
+{% endblock %}
+
+{% block content %}
+	<form class="offset-md-3 col-md-6" method="POST">
+ 		<div class="form-group">
+ 			{{ form.message.label() }}
+ 			{{ form.message(class="form-control", rows="5") }}
+ 			{% for error in form.message.errors: %}
+	 			<span class="alert">[{{ error }}]</span>
+			{% endfor %}
+		</div>
+		<div class="form-group">
+			{{ form.submit(class='btn btn-primary') }}
+  		</div>
+	</form>
+	<div class = "offset-md-3 col-md-6 comments">
+		{% for item in comm.items %}
+			<div class="comments-item">
+				<p>{{ item.comment }}</p>
+				<p>{{ item.created }}</p>
+			</div>
+		{% endfor %}
+	</div>
+  <ul class="offset-md-3 col-md-6 d-flex justify-content-center pagination">
+    <li class="page-item {% if not comm.has_prev %} disabled {% endif %}">
+      <a class="page-link" href="./?page={{ comm.prev_num }}" tabindex="-1">Previous</a>
+    </li>
+    {% for item in comm.iter_pages() %}
+    	<li class="page-item {% if item==comm.page %}active {% endif %}">
+    		<a class="page-link" href="./?page={{ item }}">{{ item }}</a>
+    	</li>
+    {% endfor %}
+    <li class="page-item {% if not comm.has_next %} disabled {% endif %}">
+      <a class="page-link" href="./?page={{ comm.next_num }}">Next</a>
+    </li>
+  </ul>
+{% endblock %}

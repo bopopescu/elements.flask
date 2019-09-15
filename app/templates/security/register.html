@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+
+{% block title %} 
+	Registration
+{% endblock %}
+
+{% block content_title %} 
+	Registration
+{% endblock %}
+
+{% block content %} 
+	<form class="col-md-6 offset-md-3" action="{{ url_for('registration') }}" method="POST">
+
+	<div class="form-group">
+		{{ form.email.label() }}
+	  	{{ form.email(class='form-control', placeholder='Email') }}
+	</div>
+	{% for error in form.email.errors: %}
+	 	<span class="alert">[{{ error }}]</span>
+	 {% endfor %}
+
+	 <div class="form-group">
+	 	{{ form.password.label() }}
+	  	{{ form.password(class='form-control', placeholder='Password') }}
+	</div>
+	{% for error in form.password.errors: %}
+	 	<span class="alert">[{{ error }}]</span>
+	 {% endfor %}
+
+	 <div class="form-group">
+	 	{{ form.password2.label() }}
+	  	{{ form.password2(class='form-control', placeholder='Repeat Password') }}
+	</div>
+	{% for error in form.password2.errors: %}
+	 	<span class="alert">[{{ error }}]</span>
+	 {% endfor %}
+
+	 <div class="form-group">
+	  	{{ form.submit(class='btn btn-primary') }}
+	</div>
+
+
+	
+
+	</form>
+{% endblock %}
